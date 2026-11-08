@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jessica Pohlmann</title>
+<meta name="description" content="Jessica Pohlmann, PhD candidate in Philosophy at Rutgers University. Metaphysics and philosophy of physics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed identity column on the left (photo, name, links), a single reading column on the right. Stacks on phones. */
+:root {
+  --bg: #fbfcfd;
+  --fg: #1c2229;
+  --muted: #5c6773;
+  --rule: #dfe4ea;
+  --accent: #1d5a7a;
+  --accent-soft: #e8f0f5;
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --sans: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171c; --fg: #e3e8ed; --muted: #97a3af; --rule: #28313a;
+    --accent: #7fbfdf; --accent-soft: #1b2a35; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171c; --fg: #e3e8ed; --muted: #97a3af; --rule: #28313a;
+  --accent: #7fbfdf; --accent-soft: #1b2a35; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--sans); font-size: 16px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+.wrap {
+  max-width: 1040px; margin: 0 auto; padding-block: 64px 48px;
+  display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 64px;
+}
+
+/* Identity column */
+.id { position: sticky; top: 48px; align-self: start; display: flex; flex-direction: column; gap: 18px; }
+.photo {
+  width: 148px; aspect-ratio: 1; max-width: 100%; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-size: 52px; letter-spacing: 0.02em;
+}
+.id h1 { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; }
+.role { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 15px; }
+.links .email { font-family: var(--mono); font-size: 13px; color: var(--fg); user-select: all; }
+nav.jump { display: flex; flex-wrap: wrap; gap: 6px 16px; padding-top: 14px; border-top: 1px solid var(--rule);
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; }
+nav.jump a { color: var(--muted); text-decoration: none; }
+nav.jump a:hover { color: var(--accent); }
+
+/* Content column */
+main { display: flex; flex-direction: column; gap: 56px; max-width: 660px; }
+section { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 32px; }
+h2 {
+  font-family: var(--sans); font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--muted); margin: 0;
+  padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+}
+p { margin: 0; }
+.lede { font-family: var(--serif); font-size: 21px; line-height: 1.55; text-wrap: pretty; }
+
+.news { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.news li { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
+.date { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+
+.pubs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+.pub-title { font-family: var(--serif); font-size: 18px; font-weight: 600; line-height: 1.4; }
+.authors { color: var(--muted); font-size: 15px; }
+.authors .me { color: var(--fg); font-weight: 600; }
+.venue { font-style: italic; font-size: 15px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.tags a {
+  font-family: var(--mono); font-size: 12px; text-decoration: none;
+  padding: 2px 8px; border: 1px solid var(--rule); border-radius: 3px;
+}
+.tags a:hover { border-color: var(--accent); background: var(--accent-soft); }
+.status { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.abstract { font-size: 15px; color: var(--muted); line-height: 1.6; margin-top: 6px; }
+
+.rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.rows li { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline; }
+.rows .date { padding-top: 0; white-space: nowrap; }
+
+footer { color: var(--muted); font-size: 13px; padding-top: 16px; border-top: 1px solid var(--rule); }
+
+@media (max-width: 800px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 36px 32px; }
+  .id { position: static; }
+  .photo { width: 104px; font-size: 38px; }
+  .lede { font-size: 19px; }
+  .rows li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <aside class="id">
+    <!-- To add a photo, replace the next line with: <img class="photo" src="photo.jpg" alt="Jessica Pohlmann"> -->
+    <div class="photo" aria-hidden="true">JP</div>
+    <h1>Jessica Pohlmann</h1>
+    <p class="role">PhD Candidate, Department of Philosophy<br>Rutgers University</p>
+    <ul class="links">
+      <li class="email">jessica.pohlmann [at] rutgers.edu</li>
+      <li><a href="cv.pdf">Curriculum vitae (PDF)</a></li>
+      <li><a href="https://philpeople.org/profiles/jessica-pohlmann">PhilPeople</a></li>
+    </ul>
+    <nav class="jump" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#publications">Publications</a>
+      <a href="#works-in-progress">In progress</a>
+      <a href="#talks">Talks</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#education">Education</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p class="lede">I am a PhD candidate in philosophy at Rutgers University. I work in metaphysics and the philosophy of physics, with a focus on mereology, ontological dependence, metaphysical issues in quantum mechanics, and the emergence of spacetime in quantum gravity.</p>
+      <p>Before coming to Rutgers in 2024, I was a PhD candidate at the Dianoia Institute of Philosophy at Australian Catholic University, and I completed an MPhil at the University of Adelaide. I am also the editorial assistant for the <em>Australasian Journal of Philosophy</em>.</p>
+    </section>
+
+    <section id="publications">
+      <h2>Publications</h2>
+      <ol class="pubs">
+        <li>
+          <div class="pub-title">Priority Monism and the Emergence of Spacetime</div>
+          <div class="authors">Sam Baron and <span class="me">Jessica Pohlmann</span></div>
+          <div class="venue">Synthese 205 (90), 2025.</div>
+          <div class="tags"><a href="https://link.springer.com/article/10.1007/s11229-024-04859-7">Open access</a><a href="https://doi.org/10.1007/s11229-024-04859-7">DOI</a></div>
+        </li>
+        <li>
+          <div class="pub-title">Mereological Models of Spacetime Emergence</div>
+          <div class="authors"><span class="me">Jessica Pohlmann</span></div>
+          <div class="venue">Philosophy Compass 19 (7): e13003, 2024.</div>
+          <div class="tags"><a href="https://philarchive.org/rec/POHMMO">PhilArchive</a><a href="https://doi.org/10.1111/phc3.13003">DOI</a></div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="works-in-progress">
+      <h2>Works in progress</h2>
+      <ol class="pubs">
+        <li>
+          <div class="pub-title">Metaphysics and Representation: The Case of Quantum Non-separability</div>
+          <p class="abstract">Quantum entanglement is often taken to show that the world is non-separable, and so to support metaphysical conclusions about holism and mereological structure. I argue that such conclusions cannot simply be read off the quantum formalism, because whether a quantum state counts as separable depends on two representational choices the formalism does not settle: how a system is decomposed into subsystems, and the mathematical framework and rule by which the states of those subsystems are combined. I show that metaphysical lessons from quantum non-separability are available only once further metaphysical work has been done.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="talks">
+      <h2>Presentations</h2>
+      <ul class="rows">
+        <li><span>Commentary on “Principle of Sufficient Reason and Explicability Arguments” by Ulrich Meyer, Society for the Metaphysics of Science Conference, University of Toronto</span><span class="date">May 2026</span></li>
+        <li><span>Commentary on “Grounding, Causation, and Spacetime” by Kian Salimkhani and Annica Vieser, Society for the Metaphysics of Science Conference, University of Toronto</span><span class="date">May 2026</span></li>
+        <li><span>“Metaphysics and Representation: The Case of Quantum Non-separability,” Midwest PhilPhys Meeting 2026, Department of Philosophy, University of Illinois Chicago</span><span class="date">Apr 2026</span></li>
+        <li><span>“Priority Monism and the Emergence of Spacetime,” Australasian Association of Philosophy Conference, University of Western Australia</span><span class="date">Jul 2024</span></li>
+        <li><span>Commentary on “The Many Problems of Spacetime Emergence in Quantum Gravity” by Jaksland and Salimkhani, Metaphysics Beyond Spacetime, Ovronnaz, Switzerland</span><span class="date">Jun 2024</span></li>
+        <li><span>Commentary on “Philosophical Methodology: A Plea for Tolerance” by Baron, Norton et al., Eastern Hemisphere Language &amp; Metaphysics Network (online)</span><span class="date">Apr 2024</span></li>
+        <li><span>“Mereological Models of Spacetime Emergence,” Space, Time, and Location Workshop, University of Adelaide</span><span class="date">Jul 2023</span></li>
+        <li><span>“Mereological Models of Spacetime Emergence,” Australasian Association of Philosophy Conference, Australian Catholic University</span><span class="date">Jul 2023</span></li>
+        <li><span>“A New Theory of Existential Dependence,” Space, Time and Spacetime Workshop, University of Sydney</span><span class="date">Mar 2023</span></li>
+        <li><span>“A Novel Framework for Ontological Dependence: Exploring J.L. Mackie’s INUS Condition for Causation,” Australasian Postgraduate Philosophy Conference, University of Wollongong</span><span class="date">Nov 2021</span></li>
+        <li><span>“An INUS-Inspired Framework for Existential Dependence,” Philosophy Postgraduate Colloquium, University of Adelaide</span><span class="date">Jul 2021</span></li>
+        <li><span>“What Role Do Intuitions Play in the Methods of Naturalized Metaphysics?” Philosophy Postgraduate Colloquium, University of Adelaide</span><span class="date">Jul 2020</span></li>
+        <li><span>“Philosophical Analysis and Methodological Naturalism,” Australasian Postgraduate Philosophy Conference, Victoria University of Wellington</span><span class="date">Dec 2019</span></li>
+      </ul>
+    </section>
+
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <ul class="rows">
+        <li><span>Instructor, PHIL 201: Introduction to Logic, Rutgers</span><span class="date">Spring 2027</span></li>
+        <li><span>Teaching Assistant, PHIL 329: Minds, Machines, and Persons, Rutgers</span><span class="date">Fall 2026</span></li>
+        <li><span>Grader, PHIL 226: Philosophy of Physics, Rutgers</span><span class="date">Fall 2026</span></li>
+        <li><span>Grader, PHIL 315: Applied Symbolic Logic, Rutgers</span><span class="date">Spring 2026</span></li>
+        <li><span>Grader, PHIL 426: Philosophy of Physics: Quantum Mechanics, Rutgers</span><span class="date">Spring 2026</span></li>
+        <li><span>Tutor, PHIL 1103: Morality, Society, and the Individual, Adelaide</span><span class="date">2022</span></li>
+        <li><span>Grader, PHIL 2040: Metaphysics: Identity, Time, and Freedom, Adelaide</span><span class="date">2022</span></li>
+        <li><span>Grader, PHIL 1102: Mind and World, Adelaide</span><span class="date">2021</span></li>
+        <li><span>Grader, PHIL 2050: Philosophy of Science, Adelaide</span><span class="date">2021</span></li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <ul class="rows">
+        <li><span>PhD, Philosophy, Rutgers University (in progress)</span><span class="date">2024–</span></li>
+        <li><span>PhD studies, Philosophy, Dianoia Institute of Philosophy, Australian Catholic University. Supervisors: Sam Baron and Peter Fritz</span><span class="date">2023–2024</span></li>
+        <li><span>MPhil, Philosophy, University of Adelaide. Thesis: <em>A Renewed Modal Account of Existential Dependence</em>. Supervisors: Antony Eagle, Cody Gilmore, Shieva Kleinschmidt</span><span class="date">2020–2022</span></li>
+        <li><span>MA, Philosophy, University of New England</span><span class="date">2016–2019</span></li>
+      </ul>
+    </section>
+
+    <footer>Last updated November 2026.</footer>
+  </main>
+</div>
+</body>
+</html>
